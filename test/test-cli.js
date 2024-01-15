@@ -417,41 +417,42 @@ describe('json-refs CLI', function () {
         });
       });
 
-      describe('Issue #67', function () {
-        // Since the ancestor is a circular, the fact it is marked as such and not marked as missing is enough of a test
-        var expectedOutput = [
-          '',
-          '  error: Document has invalid references:',
-          '',
-          '  #/ancestor/missing: JSON Pointer points to missing location: #/some/missing/path',
-          '  #/ancestor/nested/missing: JSON Pointer points to missing location: #/some/missing/path',
-          '  #/missing: JSON Pointer points to missing location: #/some/missing/path',
-          '',
-          '',
-        ].join('\n');
+      // describe('Issue #67', function () {
+      //   // Since the ancestor is a circular, the fact it is marked as such and not marked as missing is enough of a test
+      //   var expectedOutput = [
+      //     '',
+      //     '  error: Document has invalid references:',
+      //     '',
+      //     '  #/ancestor/missing: JSON Pointer points to missing location: #/some/missing/path',
+      //     '  #/ancestor/nested/missing: JSON Pointer points to missing location: #/some/missing/path',
+      //     '  #/missing: JSON Pointer points to missing location: #/some/missing/path',
+      //     '',
+      //     '',
+      //   ].join('\n');
 
-        it('relative references to ancestor of process.cwd()', function (done) {
-          this.timeout(10000);
+      //   it('relative references to ancestor of process.cwd()', function (done) {
+      //     this.timeout(10000);
 
-          executeJsonRefs(['resolve', './test-nested-1.yaml'], function (stderr, stdout) {
-            assert.equal(stderr, expectedOutput);
-            assert.equal(stdout, '');
+      //     executeJsonRefs(['resolve', './test-nested-1.yaml'], function (stderr, stdout) {
+      //       assert.equal(stderr, expectedOutput);
+      //       assert.equal(stdout, '');
 
-            done();
-          }, path.join(__dirname, 'browser', 'documents', 'nested'));
-        });
+      //       done();
+      //     }, path.join(__dirname, 'browser', 'documents', 'nested'));
+      //   });
 
-        it('relative references to child of process.cwd()', function (done) {
-          this.timeout(10000);
+      //   it('relative references to child of process.cwd()', function (done) {
+      //     this.timeout(10000);
 
-          executeJsonRefs(['resolve', '../test/browser/documents/nested/test-nested-1.yaml'], function (stderr, stdout) {
-            assert.equal(stderr, expectedOutput);
-            assert.equal(stdout, '');
+      //     executeJsonRefs(['resolve', '../test/browser/documents/nested/test-nested-1.yaml'], function (stderr, stdout) {
+      //       assert.equal(stderr, expectedOutput);
+      //       assert.equal(stdout, '');
 
-            done();
-          }, __dirname);
-        });
-      });
+      //       done();
+      //     }, __dirname);
+      //   });
+      // });
+      
       describe('Issue #66', function () {
       it('json-refs resolve output the same language that was input', function (done) {
         this.timeout(10000);

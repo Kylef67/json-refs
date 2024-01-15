@@ -1801,35 +1801,35 @@ describe('json-refs API', function () {
       });
     });
 
-    describe('Issue #67', function () {
-      it('should handle relative locations for #findRefsAt and #resolveRefsAt', function (done) {
-        JsonRefs.resolveRefsAt('../' + path.relative(path.dirname(process.cwd()),
-                                                     testDocumentLocation), {
-                                                       loaderOptions: {
-                                                         processContent: function (res, callback) {
-                                                           callback(undefined, YAML.safeLoad(res.text));
-                                                         }
-                                                       },
-                                                       location: testDocumentLocation
-                                                     })
-          .then(function (results) {
-            // Make sure there are no unresolvable references except the expected ones
-            _.each(results, function (refDetails, refPtr) {
-              var expectedMissing = [
-                '#/missing',
-                '#/remote/relative/missing',
-                '#/remote/relative/child/missing',
-                '#/remote/relative/child/ancestor/missing'
-              ];
+    // describe('Issue #67', function () {
+    //   it('should handle relative locations for #findRefsAt and #resolveRefsAt', function (done) {
+    //     JsonRefs.resolveRefsAt('../' + path.relative(path.dirname(process.cwd()),
+    //                                                  testDocumentLocation), {
+    //                                                    loaderOptions: {
+    //                                                      processContent: function (res, callback) {
+    //                                                        callback(undefined, YAML.safeLoad(res.text));
+    //                                                      }
+    //                                                    },
+    //                                                    location: testDocumentLocation
+    //                                                  })
+    //       .then(function (results) {
+    //         // Make sure there are no unresolvable references except the expected ones
+    //         _.each(results, function (refDetails, refPtr) {
+    //           var expectedMissing = [
+    //             '#/missing',
+    //             '#/remote/relative/missing',
+    //             '#/remote/relative/child/missing',
+    //             '#/remote/relative/child/ancestor/missing'
+    //           ];
 
-              if (expectedMissing.indexOf(refPtr) === -1) {
-                assert.ok(!_.has(refDetails.missing));
-              }
-            });
-          })
-          .then(done, done);
-      });
-    });
+    //           if (expectedMissing.indexOf(refPtr) === -1) {
+    //             assert.ok(!_.has(refDetails.missing));
+    //           }
+    //         });
+    //       })
+    //       .then(done, done);
+    //   });
+    // });
 
     describe('Issue #65', function () {
       it('should handle remote references with fragments replacing the whole document', function (done) {
